@@ -47,7 +47,11 @@ class SecondViewController: UIViewController {
     
     @objc func saveTapped() {
         let text = textField.text ?? ""
+        
+        MessageStorage.shared.saveMessage(text: text)
+        
         delegate?.didSaveText(text)
+        
         navigationController?.popViewController(animated: true)
     }
 }

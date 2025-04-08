@@ -16,9 +16,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .systemPink
+        view.backgroundColor = .systemPurple
         
-        label.text = "Tu pojawi się tekst z powrotem ↓"
+        if let last = MessageStorage.shared.fetchLastMessage() {
+            label.text = "Z CoreData: \(last.text ?? "brak")"
+        } else {
+            label.text = "Brak danych z CoreData"
+        }
+        
         label.font = UIFont.systemFont(ofSize: 16)
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -29,7 +34,7 @@ class ViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         
-        button.setTitle("Przejdź dalej", for: .normal)
+        button.setTitle("Zapisz do Core Data", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.addTarget(self, action: #selector(goToSecondScreen), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -53,10 +58,9 @@ class ViewController: UIViewController {
     }
 
     @objc func goToSecondScreen() {
-        let secondVC = SecondViewController()
-        secondVC.receivedText = textField.text ?? ""
-        secondVC.delegate = self
-        navigationController?.pushViewController(secondVC, animated: true)
+        let text = textField.text ?? ""
+        MessageStorage.shared.saveMessage(text: text)
+        label.text = "Zapisano: \(text)"
     }
 }
 
