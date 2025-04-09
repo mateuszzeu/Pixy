@@ -11,6 +11,7 @@ class WidgetViewController: UIViewController {
     
     private let messageLabel = UILabel()
     private let createButton = UIButton(type: .system)
+    private let logoutButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,13 @@ class WidgetViewController: UIViewController {
         createButton.setTitleColor(.white, for: .normal)
         createButton.addTarget(self, action: #selector(openCreateMessage), for: .touchUpInside)
         createButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        logoutButton.setTitle("Wyloguj się", for: .normal)
+        logoutButton.setTitleColor(.white, for: .normal)
+        logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        logoutButton.translatesAutoresizingMaskIntoConstraints = false
+        logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
+        view.addSubview(logoutButton)
 
         
         view.addSubview(messageLabel)
@@ -48,7 +56,10 @@ class WidgetViewController: UIViewController {
             messageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
             createButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 30),
-            createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
@@ -64,6 +75,12 @@ class WidgetViewController: UIViewController {
         let createVC = CreateMessageViewController()
         createVC.delegate = self
         navigationController?.pushViewController(createVC, animated: true)
+    }
+    
+    @objc private func logoutTapped() {
+        UserDefaults.standard.removeObject(forKey: "loggedInEmail")
+        let loginVC = LoginViewController()
+        navigationController?.setViewControllers([loginVC], animated: true)
     }
 }
 

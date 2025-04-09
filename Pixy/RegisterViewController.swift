@@ -85,6 +85,8 @@ class RegisterViewController: UIViewController {
             newUser.id = UUID()
 
             try context.save()
+            
+            UserDefaults.standard.set(email, forKey: "loggedInEmail")
 
             let mainVC = WidgetViewController()
             navigationController?.popViewController(animated: true)
