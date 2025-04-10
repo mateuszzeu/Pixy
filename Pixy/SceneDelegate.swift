@@ -20,9 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let loggedInEmail = UserDefaults.standard.string(forKey: "loggedInEmail")
         
         if loggedInEmail != nil {
-            window.rootViewController = UINavigationController(rootViewController: LoginViewController())
-        } else {
             window.rootViewController = UINavigationController(rootViewController: WidgetViewController())
+        } else {
+            window.rootViewController = UINavigationController(rootViewController: LoginViewController())
         }
         window.makeKeyAndVisible()
         self.window = window

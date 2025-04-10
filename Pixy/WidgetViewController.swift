@@ -5,6 +5,7 @@
 //  Created by Liza on 07/04/2025.
 //
 
+import CoreData
 import UIKit
 
 class WidgetViewController: UIViewController {
@@ -64,10 +65,26 @@ class WidgetViewController: UIViewController {
     }
 
     private func loadMessage() {
-        if let last = MessageStorage.shared.fetchLastMessage() {
-            messageLabel.text = "\(last.text ?? "Brak wiadomości")"
-        } else {
-            messageLabel.text = "Brak wiadomości do wyświetlenia"
+        guard let currentEmail = UserDefaults.standard.string(forKey: "loggedInEmail") else {
+            messageLabel.text = "Czekaj na wiadomosc"
+            return
+        }
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let request: NSFetchRequest<Message> = Message.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "receiverEmail == %@", currentEmail)
+        request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
+        request.fetchLimit = 1
+
+        do {
+            if let last = try context.fetch(request).first {
+                messageLabel.text = last.text ?? "Brak wiadomości"
+            } else {
+                messageLabel.text = "Brak wiadomości do wyświetlenia"
+            }
+        } catch {
+            messageLabel.text = "Błąd podczas ładowania wiadomości"
         }
     }
 
@@ -87,6 +104,6 @@ class WidgetViewController: UIViewController {
 
 extension WidgetViewController: CreateMessageViewControllerDelegate {
     func didSaveText(_ text: String) {
-        messageLabel.text = text
+        loadMessage()
     }
 }

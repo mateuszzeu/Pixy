@@ -86,8 +86,12 @@ class LoginViewController: UIViewController {
             let users = try context.fetch(request)
             if let user = users.first {
                 if user.password == password {
-                    let mainVC = WidgetViewController()
-                    navigationController?.setViewControllers([mainVC], animated: true)
+                    UserDefaults.standard.set(email, forKey: "loggedInEmail")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        let mainVC = WidgetViewController()
+                        self.navigationController?.setViewControllers([mainVC], animated: true)
+                    }
+
                 } else {
                     showAlert(title: "Błąd", message: "Nieprawidłowe hasło")
                 }

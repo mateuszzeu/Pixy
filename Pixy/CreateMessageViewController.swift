@@ -14,6 +14,7 @@ class CreateMessageViewController: UIViewController {
     
     weak var delegate: CreateMessageViewControllerDelegate?
     
+    private let receiverField = UITextField()
     private let textField = UITextField()
     private let saveButton = UIButton(type: .system)
     
@@ -24,6 +25,12 @@ class CreateMessageViewController: UIViewController {
         setupUI()
     }
     private func setupUI() {
+        receiverField.placeholder = "Email odbiorcy"
+        receiverField.borderStyle = .roundedRect
+        receiverField.autocapitalizationType = .none
+        receiverField.keyboardType = .emailAddress
+        receiverField.translatesAutoresizingMaskIntoConstraints = false
+        
         textField.placeholder = "Wpisz wiadomość"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -36,10 +43,15 @@ class CreateMessageViewController: UIViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         
+        view.addSubview(receiverField)
         view.addSubview(textField)
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
+            receiverField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            receiverField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60),
+            receiverField.widthAnchor.constraint(equalToConstant: 250),
+            
             textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textField.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -20),
             textField.widthAnchor.constraint(equalToConstant: 250),
@@ -52,12 +64,25 @@ class CreateMessageViewController: UIViewController {
     }
     
     @objc func saveTapped() {
-        let text = textField.text ?? ""
-        
-        MessageStorage.shared.saveMessage(text: text)
-        
-        delegate?.didSaveText(text)
-        
-        navigationController?.popViewController(animated: true)
+            guard let text = textField.text, !text.isEmpty,
+                  let receiver = receiverField.text, !receiver.isEmpty,
+                  let author = UserDefaults.standard.string(forKey: "loggedInEmail") else {
+                return
+            }
+            
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let message = Message(context: context)
+            message.text = text
+            message.created = Date()
+            message.authorEmail = author
+            message.receiverEmail = receiver
+            
+            do {
+                try context.save()
+                delegate?.didSaveText(text)
+                navigationController?.popViewController(animated: true)
+            } catch {
+                assertionFailure("Nie udało się zapisać wiadomości: \(error.localizedDescription)")
+            }
+        }
     }
-}
