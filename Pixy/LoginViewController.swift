@@ -86,7 +86,8 @@ class LoginViewController: UIViewController {
             let users = try context.fetch(request)
             if let user = users.first {
                 if user.password == password {
-                    UserDefaults.standard.set(email, forKey: "loggedInEmail")
+                    UserDefaults(suiteName: "group.com.xzeu.pixy")?.set(email, forKey: "loggedInEmail")
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         let mainVC = WidgetViewController()
                         self.navigationController?.setViewControllers([mainVC], animated: true)

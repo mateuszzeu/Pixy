@@ -62,9 +62,9 @@
             filePath = "Pixy/LoginViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "openRegister()"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "loginTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -5,6 +5,7 @@
 //  Created by Liza on 07/04/2025.
 //
 import UIKit
+import WidgetKit
 
 protocol CreateMessageViewControllerDelegate: AnyObject {
     func didSaveText(_ text: String)
@@ -66,8 +67,8 @@ class CreateMessageViewController: UIViewController {
     @objc func saveTapped() {
             guard let text = textField.text, !text.isEmpty,
                   let receiver = receiverField.text, !receiver.isEmpty,
-                  let author = UserDefaults.standard.string(forKey: "loggedInEmail") else {
-                return
+                  let author = UserDefaults(suiteName: "group.com.xzeu.pixy")?.string(forKey: "loggedInEmail") else {
+                    return
             }
             
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -80,6 +81,9 @@ class CreateMessageViewController: UIViewController {
             do {
                 try context.save()
                 delegate?.didSaveText(text)
+                
+                WidgetCenter.shared.reloadAllTimelines()
+                
                 navigationController?.popViewController(animated: true)
             } catch {
                 assertionFailure("Nie udało się zapisać wiadomości: \(error.localizedDescription)")

@@ -11,17 +11,64 @@
 		6E6260552DA6A79500DB78FA /* PixyAccount+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6260522DA6A79500DB78FA /* PixyAccount+CoreDataClass.swift */; };
 		6E6260592DA6C87200DB78FA /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6260582DA6C86B00DB78FA /* Message+CoreDataClass.swift */; };
 		6E62605B2DA6C88600DB78FA /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E62605A2DA6C88000DB78FA /* Message+CoreDataProperties.swift */; };
+		6E62609F2DA8F9C400DB78FA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E62609E2DA8F9C400DB78FA /* WidgetKit.framework */; };
+		6E6260A12DA8F9C400DB78FA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6260A02DA8F9C400DB78FA /* SwiftUI.framework */; };
+		6E6260AC2DA8F9C600DB78FA /* PixyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6E62609C2DA8F9C400DB78FA /* PixyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6E6260B62DA9032500DB78FA /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E62605A2DA6C88000DB78FA /* Message+CoreDataProperties.swift */; };
+		6E6260B72DA9032A00DB78FA /* Message+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6260582DA6C86B00DB78FA /* Message+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E6260AA2DA8F9C600DB78FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E74AF6F2DA4270500FB713C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E62609B2DA8F9C400DB78FA;
+			remoteInfo = PixyWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6E6260AD2DA8F9C600DB78FA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6E6260AC2DA8F9C600DB78FA /* PixyWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6E6260522DA6A79500DB78FA /* PixyAccount+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PixyAccount+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6E6260532DA6A79500DB78FA /* PixyAccount+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PixyAccount+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6E6260582DA6C86B00DB78FA /* Message+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6E62605A2DA6C88000DB78FA /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6E62609C2DA8F9C400DB78FA /* PixyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PixyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E62609E2DA8F9C400DB78FA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		6E6260A02DA8F9C400DB78FA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		6E6260B52DA9023000DB78FA /* PixyWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PixyWidgetExtension.entitlements; sourceTree = "<group>"; };
 		6E74AF772DA4270500FB713C /* Pixy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pixy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6E6260B12DA8F9C600DB78FA /* Exceptions for "PixyWidget" folder in "PixyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */;
+		};
+		6E6260B32DA900D300DB78FA /* Exceptions for "Pixy" folder in "PixyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PixyDataModel.xcdatamodeld,
+			);
+			target = 6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */;
+		};
 		6E74AF892DA4270600FB713C /* Exceptions for "Pixy" folder in "Pixy" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -32,10 +79,19 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6E6260A22DA8F9C400DB78FA /* PixyWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6E6260B12DA8F9C600DB78FA /* Exceptions for "PixyWidget" folder in "PixyWidgetExtension" target */,
+			);
+			path = PixyWidget;
+			sourceTree = "<group>";
+		};
 		6E74AF792DA4270500FB713C /* Pixy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				6E74AF892DA4270600FB713C /* Exceptions for "Pixy" folder in "Pixy" target */,
+				6E6260B32DA900D300DB78FA /* Exceptions for "Pixy" folder in "PixyWidgetExtension" target */,
 			);
 			path = Pixy;
 			sourceTree = "<group>";
@@ -43,6 +99,15 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6E6260992DA8F9C400DB78FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6260A12DA8F9C400DB78FA /* SwiftUI.framework in Frameworks */,
+				6E62609F2DA8F9C400DB78FA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E74AF742DA4270500FB713C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -53,14 +118,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E62609D2DA8F9C400DB78FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E62609E2DA8F9C400DB78FA /* WidgetKit.framework */,
+				6E6260A02DA8F9C400DB78FA /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6E74AF6E2DA4270500FB713C = {
 			isa = PBXGroup;
 			children = (
+				6E6260B52DA9023000DB78FA /* PixyWidgetExtension.entitlements */,
 				6E62605A2DA6C88000DB78FA /* Message+CoreDataProperties.swift */,
 				6E6260582DA6C86B00DB78FA /* Message+CoreDataClass.swift */,
 				6E6260522DA6A79500DB78FA /* PixyAccount+CoreDataClass.swift */,
 				6E6260532DA6A79500DB78FA /* PixyAccount+CoreDataProperties.swift */,
 				6E74AF792DA4270500FB713C /* Pixy */,
+				6E6260A22DA8F9C400DB78FA /* PixyWidget */,
+				6E62609D2DA8F9C400DB78FA /* Frameworks */,
 				6E74AF782DA4270500FB713C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				6E74AF772DA4270500FB713C /* Pixy.app */,
+				6E62609C2DA8F9C400DB78FA /* PixyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,6 +154,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E6260B02DA8F9C600DB78FA /* Build configuration list for PBXNativeTarget "PixyWidgetExtension" */;
+			buildPhases = (
+				6E6260982DA8F9C400DB78FA /* Sources */,
+				6E6260992DA8F9C400DB78FA /* Frameworks */,
+				6E62609A2DA8F9C400DB78FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6E6260A22DA8F9C400DB78FA /* PixyWidget */,
+			);
+			name = PixyWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = PixyWidgetExtension;
+			productReference = 6E62609C2DA8F9C400DB78FA /* PixyWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		6E74AF762DA4270500FB713C /* Pixy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E74AF8A2DA4270600FB713C /* Build configuration list for PBXNativeTarget "Pixy" */;
@@ -83,10 +183,12 @@
 				6E74AF732DA4270500FB713C /* Sources */,
 				6E74AF742DA4270500FB713C /* Frameworks */,
 				6E74AF752DA4270500FB713C /* Resources */,
+				6E6260AD2DA8F9C600DB78FA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6E6260AB2DA8F9C600DB78FA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				6E74AF792DA4270500FB713C /* Pixy */,
@@ -108,6 +210,9 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					6E62609B2DA8F9C400DB78FA = {
+						CreatedOnToolsVersion = 16.3;
+					};
 					6E74AF762DA4270500FB713C = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -128,11 +233,19 @@
 			projectRoot = "";
 			targets = (
 				6E74AF762DA4270500FB713C /* Pixy */,
+				6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6E62609A2DA8F9C400DB78FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E74AF752DA4270500FB713C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +256,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6E6260982DA8F9C400DB78FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E6260B62DA9032500DB78FA /* Message+CoreDataProperties.swift in Sources */,
+				6E6260B72DA9032A00DB78FA /* Message+CoreDataClass.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6E74AF732DA4270500FB713C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -156,12 +278,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6E6260AB2DA8F9C600DB78FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */;
+			targetProxy = 6E6260AA2DA8F9C600DB78FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6E6260AE2DA8F9C600DB78FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PixyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 434W4NYSB5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PixyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PixyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xzeu.Pixy.PixyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E6260AF2DA8F9C600DB78FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = PixyWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 434W4NYSB5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PixyWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PixyWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.xzeu.Pixy.PixyWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		6E74AF8B2DA4270600FB713C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pixy/Pixy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 434W4NYSB5;
@@ -190,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Pixy/Pixy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 434W4NYSB5;
@@ -337,6 +525,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6E6260B02DA8F9C600DB78FA /* Build configuration list for PBXNativeTarget "PixyWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E6260AE2DA8F9C600DB78FA /* Debug */,
+				6E6260AF2DA8F9C600DB78FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6E74AF722DA4270500FB713C /* Build configuration list for PBXProject "Pixy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

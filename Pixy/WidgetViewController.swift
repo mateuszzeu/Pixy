@@ -65,7 +65,7 @@ class WidgetViewController: UIViewController {
     }
 
     private func loadMessage() {
-        guard let currentEmail = UserDefaults.standard.string(forKey: "loggedInEmail") else {
+        guard let currentEmail = UserDefaults(suiteName: "group.com.xzeu.pixy")?.string(forKey: "loggedInEmail") else {
             messageLabel.text = "Czekaj na wiadomosc"
             return
         }
@@ -95,7 +95,7 @@ class WidgetViewController: UIViewController {
     }
     
     @objc private func logoutTapped() {
-        UserDefaults.standard.removeObject(forKey: "loggedInEmail")
+        UserDefaults(suiteName: "group.com.xzeu.pixy")?.removeObject(forKey: "loggedInEmail")
         let loginVC = LoginViewController()
         navigationController?.setViewControllers([loginVC], animated: true)
     }
