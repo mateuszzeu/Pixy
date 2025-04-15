@@ -10,7 +10,11 @@ import UIKit
 
 class WidgetViewController: UIViewController {
     
+    private let messageContainer = UIView()
     private let messageLabel = UILabel()
+    private let senderLabel = UILabel()
+    private let dateLabel = UILabel()
+    
     private let createButton = UIButton(type: .system)
     private let logoutButton = UIButton(type: .system)
 
@@ -22,18 +26,37 @@ class WidgetViewController: UIViewController {
     }
 
     private func setupUI() {
-        messageLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        messageContainer.backgroundColor = UIColor.systemGray6
+        messageContainer.layer.cornerRadius = 20
+        messageContainer.layer.masksToBounds = true
+        messageContainer.translatesAutoresizingMaskIntoConstraints = false
+
+        messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         messageLabel.textColor = .label
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        senderLabel.font = UIFont.systemFont(ofSize: 11, weight: .light)
+        senderLabel.textColor = .secondaryLabel
+        senderLabel.textAlignment = .center
+        senderLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        dateLabel.font = UIFont.systemFont(ofSize: 10, weight: .light)
+        dateLabel.textColor = .tertiaryLabel
+        dateLabel.textAlignment = .center
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        messageContainer.addSubview(messageLabel)
+        messageContainer.addSubview(senderLabel)
+        messageContainer.addSubview(dateLabel)
+        view.addSubview(messageContainer)
 
         createButton.setTitle("Send a Pix ✨", for: .normal)
         createButton.setTitleColor(.secondaryLabel, for: .normal)
         createButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         createButton.translatesAutoresizingMaskIntoConstraints = false
         createButton.addTarget(self, action: #selector(openCreateMessage), for: .touchUpInside)
-
         createButton.layer.shadowColor = UIColor.black.cgColor
         createButton.layer.shadowOpacity = 0.2
         createButton.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -45,28 +68,41 @@ class WidgetViewController: UIViewController {
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
 
-        view.addSubview(messageLabel)
         view.addSubview(createButton)
         view.addSubview(logoutButton)
 
         NSLayoutConstraint.activate([
-            messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            messageLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
-            messageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            messageLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            messageContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            messageContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            messageContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            messageContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            messageContainer.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            
+            messageLabel.topAnchor.constraint(equalTo: messageContainer.topAnchor, constant: 20),
+            messageLabel.leadingAnchor.constraint(equalTo: messageContainer.leadingAnchor, constant: 16),
+            messageLabel.trailingAnchor.constraint(equalTo: messageContainer.trailingAnchor, constant: -16),
 
-            createButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 30),
+            senderLabel.bottomAnchor.constraint(equalTo: dateLabel.topAnchor, constant: -4),
+            senderLabel.leadingAnchor.constraint(equalTo: messageContainer.leadingAnchor, constant: 16),
+            senderLabel.trailingAnchor.constraint(equalTo: messageContainer.trailingAnchor, constant: -16),
+
+            dateLabel.bottomAnchor.constraint(equalTo: messageContainer.bottomAnchor, constant: -8),
+            dateLabel.leadingAnchor.constraint(equalTo: messageContainer.leadingAnchor, constant: 16),
+            dateLabel.trailingAnchor.constraint(equalTo: messageContainer.trailingAnchor, constant: -16),
+
             createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            createButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
             logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
 
-
     private func loadMessage() {
         guard let currentEmail = UserDefaults(suiteName: "group.com.xzeu.pixy")?.string(forKey: "loggedInEmail") else {
             messageLabel.text = "Wait for the message"
+            senderLabel.text = ""
+            dateLabel.text = ""
             return
         }
 
@@ -79,11 +115,24 @@ class WidgetViewController: UIViewController {
         do {
             if let last = try context.fetch(request).first {
                 messageLabel.text = last.text ?? "No message"
+                senderLabel.text = "From: \(last.authorEmail ?? "Unknown")"
+
+                if let date = last.created {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "HH:mm"
+                    dateLabel.text = formatter.string(from: date)
+                } else {
+                    dateLabel.text = ""
+                }
             } else {
                 messageLabel.text = "No message"
+                senderLabel.text = ""
+                dateLabel.text = ""
             }
         } catch {
-            messageLabel.text = "Error while loading message"
+            messageLabel.text = "Error loading message"
+            senderLabel.text = ""
+            dateLabel.text = ""
         }
     }
 
@@ -92,7 +141,7 @@ class WidgetViewController: UIViewController {
         createVC.delegate = self
         navigationController?.pushViewController(createVC, animated: true)
     }
-    
+
     @objc private func logoutTapped() {
         UserDefaults(suiteName: "group.com.xzeu.pixy")?.removeObject(forKey: "loggedInEmail")
         let loginVC = LoginViewController()
@@ -105,4 +154,3 @@ extension WidgetViewController: CreateMessageViewControllerDelegate {
         loadMessage()
     }
 }
-
