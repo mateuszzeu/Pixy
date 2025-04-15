@@ -43,7 +43,7 @@ class CreateMessageViewController: UIViewController {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.textColor = .label
         textField.attributedPlaceholder = NSAttributedString(
-            string: "Type your message...",
+            string: "Type your message",
             attributes: [
                 .foregroundColor: UIColor.secondaryLabel.withAlphaComponent(0.25),
                 .font: UIFont.systemFont(ofSize: 15)

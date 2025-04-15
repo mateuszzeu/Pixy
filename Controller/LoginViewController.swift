@@ -21,36 +21,57 @@ class LoginViewController: UIViewController {
     }
     
     private func setupUI() {
-        emailField.placeholder = "Email"
         emailField.borderStyle = .roundedRect
+        //emailField.layer.borderWidth = 1
+        emailField.layer.borderColor = UIColor.quaternaryLabel.cgColor
         emailField.autocapitalizationType = .none
         emailField.keyboardType = .emailAddress
         emailField.translatesAutoresizingMaskIntoConstraints = false
-        
-        passwordField.placeholder = "Password"
+        emailField.textColor = .label
+        emailField.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [
+                .foregroundColor: UIColor.secondaryLabel.withAlphaComponent(0.25),
+                .font: UIFont.systemFont(ofSize: 15)
+            ]
+        )
+
         passwordField.borderStyle = .roundedRect
+        //passwordField.layer.borderWidth = 1
+        passwordField.layer.borderColor = UIColor.quaternaryLabel.cgColor
         passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
-        
+        passwordField.textColor = .label
+        passwordField.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [
+                .foregroundColor: UIColor.secondaryLabel.withAlphaComponent(0.25),
+                .font: UIFont.systemFont(ofSize: 15)
+            ]
+        )
+
         loginButton.setTitle("Log in", for: .normal)
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.backgroundColor = UIColor.systemGreen
-        loginButton.layer.cornerRadius = 8
+        loginButton.setTitleColor(.secondaryLabel, for: .normal)
+        loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
-        
+
+        loginButton.layer.shadowColor = UIColor.black.cgColor
+        loginButton.layer.shadowOpacity = 0.2
+        loginButton.layer.shadowOffset = CGSize(width: 0, height: 1)
+        loginButton.layer.shadowRadius = 2
+
         registerLinkButton.setTitle("Don't have an account? Sign up", for: .normal)
         registerLinkButton.setTitleColor(.systemBlue, for: .normal)
         registerLinkButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerLinkButton.addTarget(self, action: #selector(openRegister), for: .touchUpInside)
         registerLinkButton.translatesAutoresizingMaskIntoConstraints = false
 
-        
         view.addSubview(emailField)
         view.addSubview(passwordField)
         view.addSubview(loginButton)
         view.addSubview(registerLinkButton)
-        
+
         NSLayoutConstraint.activate([
             emailField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emailField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
@@ -69,6 +90,7 @@ class LoginViewController: UIViewController {
             registerLinkButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+
     
     @objc private func loginTapped() {
         guard let email = emailField.text, !email.isEmpty,

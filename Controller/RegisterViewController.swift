@@ -4,9 +4,9 @@
 //
 //  Created by Liza on 09/04/2025.
 //
+
 import CoreData
 import UIKit
-
 
 class RegisterViewController: UIViewController {
 
@@ -16,28 +16,46 @@ class RegisterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemBackground
+        view.backgroundColor = .systemBackground
         setupUI()
     }
 
     private func setupUI() {
-        emailField.placeholder = "Email"
         emailField.borderStyle = .roundedRect
         emailField.autocapitalizationType = .none
         emailField.keyboardType = .emailAddress
         emailField.translatesAutoresizingMaskIntoConstraints = false
+        emailField.textColor = .label
+        emailField.attributedPlaceholder = NSAttributedString(
+            string: "Email",
+            attributes: [
+                .foregroundColor: UIColor.secondaryLabel.withAlphaComponent(0.25),
+                .font: UIFont.systemFont(ofSize: 15)
+            ]
+        )
 
-        passwordField.placeholder = "Password"
         passwordField.borderStyle = .roundedRect
         passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
+        passwordField.textColor = .label
+        passwordField.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [
+                .foregroundColor: UIColor.secondaryLabel.withAlphaComponent(0.25),
+                .font: UIFont.systemFont(ofSize: 15)
+            ]
+        )
 
         registerButton.setTitle("Register", for: .normal)
-        registerButton.setTitleColor(.white, for: .normal)
-        registerButton.backgroundColor = UIColor.systemBlue
-        registerButton.layer.cornerRadius = 8
+        registerButton.setTitleColor(.secondaryLabel, for: .normal)
+        registerButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.addTarget(self, action: #selector(registerTapped), for: .touchUpInside)
+
+        registerButton.layer.shadowColor = UIColor.black.cgColor
+        registerButton.layer.shadowOpacity = 0.2
+        registerButton.layer.shadowOffset = CGSize(width: 0, height: 1)
+        registerButton.layer.shadowRadius = 2
 
         view.addSubview(emailField)
         view.addSubview(passwordField)
@@ -85,12 +103,10 @@ class RegisterViewController: UIViewController {
             newUser.id = UUID()
 
             try context.save()
-            
             UserDefaults(suiteName: "group.com.xzeu.pixy")?.set(email, forKey: "loggedInEmail")
 
             let mainVC = WidgetViewController()
             navigationController?.popViewController(animated: true)
-
         } catch {
             showAlert(title: "Error", message: "Failed to save user")
         }
