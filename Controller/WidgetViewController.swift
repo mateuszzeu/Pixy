@@ -16,39 +16,38 @@ class WidgetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.68, green: 0.79, blue: 0.90, alpha: 1)
-
-
-
+        view.backgroundColor = .systemBackground
         setupUI()
         loadMessage()
     }
 
     private func setupUI() {
-        
         messageLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
-        messageLabel.textColor = .white
+        messageLabel.textColor = .label
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        
-        createButton.setTitle("Create message", for: .normal)
-        createButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        createButton.setTitleColor(.white, for: .normal)
-        createButton.addTarget(self, action: #selector(openCreateMessage), for: .touchUpInside)
+        createButton.setTitle("Send a Pix ✨", for: .normal)
+        createButton.setTitleColor(.secondaryLabel, for: .normal)
+        createButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        
+        createButton.addTarget(self, action: #selector(openCreateMessage), for: .touchUpInside)
+
+        createButton.layer.shadowColor = UIColor.black.cgColor
+        createButton.layer.shadowOpacity = 0.2
+        createButton.layer.shadowOffset = CGSize(width: 0, height: 1)
+        createButton.layer.shadowRadius = 2
+
         logoutButton.setTitle("Log out", for: .normal)
-        logoutButton.setTitleColor(.white, for: .normal)
+        logoutButton.setTitleColor(.secondaryLabel, for: .normal)
         logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
-        view.addSubview(logoutButton)
 
-        
         view.addSubview(messageLabel)
         view.addSubview(createButton)
+        view.addSubview(logoutButton)
 
         NSLayoutConstraint.activate([
             messageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -58,11 +57,12 @@ class WidgetViewController: UIViewController {
 
             createButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 30),
             createButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+
             logoutButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             logoutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
+
 
     private func loadMessage() {
         guard let currentEmail = UserDefaults(suiteName: "group.com.xzeu.pixy")?.string(forKey: "loggedInEmail") else {
@@ -72,7 +72,6 @@ class WidgetViewController: UIViewController {
 
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let request: NSFetchRequest<Message> = Message.fetchRequest()
-        
         request.predicate = NSPredicate(format: "receiverEmail == %@", currentEmail)
         request.sortDescriptors = [NSSortDescriptor(key: "created", ascending: false)]
         request.fetchLimit = 1
@@ -101,9 +100,9 @@ class WidgetViewController: UIViewController {
     }
 }
 
-
 extension WidgetViewController: CreateMessageViewControllerDelegate {
     func didSaveText(_ text: String) {
         loadMessage()
     }
 }
+
