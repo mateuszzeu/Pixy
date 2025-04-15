@@ -78,15 +78,24 @@ struct PixyWidgetEntryView: View {
     var entry: SimpleEntry
 
     var body: some View {
-        ZStack {
-            Color(red: 0.68, green: 0.79, blue: 0.90)
+        VStack {
+            Spacer()
             Text(entry.message)
-                .foregroundColor(.white)
+                .font(.system(size: 16, weight: .semibold, design: .rounded))
+                .foregroundColor(.primary)
                 .multilineTextAlignment(.center)
+                .lineLimit(4)
+                .minimumScaleFactor(0.8)
                 .padding()
+            Spacer()
         }
+        .containerBackground(.ultraThinMaterial, for: .widget)
     }
 }
+
+
+
+
 
 struct PixyWidget: Widget {
     let kind: String = "PixyWidget"
