@@ -101,6 +101,11 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		6E6FFAB62DAE5CD900397E8F /* Service */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Service;
+			sourceTree = "<group>";
+		};
 		6E74AF792DA4270500FB713C /* Pixy */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -148,6 +153,7 @@
 				6E6FFA852DAE57E400397E8F /* View */,
 				6E6FFA842DAE57B600397E8F /* Controller */,
 				6E6260A22DA8F9C400DB78FA /* PixyWidget */,
+				6E6FFAB62DAE5CD900397E8F /* Service */,
 				6E6FFA862DAE57F500397E8F /* Resources */,
 				6E62609D2DA8F9C400DB78FA /* Frameworks */,
 				6E74AF782DA4270500FB713C /* Products */,
@@ -207,6 +213,7 @@
 				6E6FFA842DAE57B600397E8F /* Controller */,
 				6E6FFA852DAE57E400397E8F /* View */,
 				6E6FFA862DAE57F500397E8F /* Resources */,
+				6E6FFAB62DAE5CD900397E8F /* Service */,
 				6E74AF792DA4270500FB713C /* Pixy */,
 			);
 			name = Pixy;

@@ -27,19 +27,19 @@ class LoginViewController: UIViewController {
         emailField.keyboardType = .emailAddress
         emailField.translatesAutoresizingMaskIntoConstraints = false
         
-        passwordField.placeholder = "Hasło"
+        passwordField.placeholder = "Password"
         passwordField.borderStyle = .roundedRect
         passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         
-        loginButton.setTitle("Zaloguj się", for: .normal)
+        loginButton.setTitle("Log in", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.backgroundColor = UIColor.systemGreen
         loginButton.layer.cornerRadius = 8
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         
-        registerLinkButton.setTitle("Nie masz konta? Zarejestruj się", for: .normal)
+        registerLinkButton.setTitle("Don't have an account? Sign up", for: .normal)
         registerLinkButton.setTitleColor(.systemBlue, for: .normal)
         registerLinkButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         registerLinkButton.addTarget(self, action: #selector(openRegister), for: .touchUpInside)
@@ -73,7 +73,7 @@ class LoginViewController: UIViewController {
     @objc private func loginTapped() {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Błąd", message: "Wprowadź dane logowania")
+            showAlert(title: "Error", message: "Enter login information")
             return
         }
 
@@ -94,13 +94,13 @@ class LoginViewController: UIViewController {
                     }
 
                 } else {
-                    showAlert(title: "Błąd", message: "Nieprawidłowe hasło")
+                    showAlert(title: "Error", message: "Wrong password")
                 }
             } else {
-                showAlert(title: "Błąd", message: "Użytkownik nie istnieje")
+                showAlert(title: "Error", message: "The user does not exist")
             }
         } catch {
-            showAlert(title: "Błąd", message: "Nie udało się pobrać danych")
+            showAlert(title: "Error", message: "Failed to download data")
         }
     }
     

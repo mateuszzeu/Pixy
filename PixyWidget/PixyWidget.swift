@@ -16,7 +16,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), message: "Ładowanie...")
+        SimpleEntry(date: Date(), message: "Loading...")
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
@@ -32,19 +32,19 @@ struct Provider: TimelineProvider {
 
     func loadLatestMessage() -> String {
         guard let appGroupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.xzeu.pixy") else {
-            return "Brak AppGroup URL"
+            return "No AppGroup URL"
         }
 
         let storeURL = appGroupURL.appendingPathComponent("PixyDataModel.sqlite")
         if !FileManager.default.fileExists(atPath: storeURL.path) {
-            return "Brak pliku bazy"
+            return "Base file missing"
         }
 
         let description = NSPersistentStoreDescription(url: storeURL)
         let container = NSPersistentContainer(name: "PixyDataModel")
         container.persistentStoreDescriptions = [description]
 
-        var result = "Brak wiadomości"
+        var result = "No message"
         let semaphore = DispatchSemaphore(value: 0)
 
         container.loadPersistentStores { _, error in
@@ -58,12 +58,12 @@ struct Provider: TimelineProvider {
                 request.fetchLimit = 1
 
                 if let message = try? context.fetch(request).first {
-                    result = message.text ?? "Brak treści"
+                    result = message.text ?? "No message"
                 } else {
-                    result = "Brak wiadomości"
+                    result = "No message"
                 }
             } else {
-                result = "Błąd ładowania bazy"
+                result = "No loading error"
             }
             semaphore.signal()
         }
@@ -105,7 +105,7 @@ struct PixyWidget: Widget {
             PixyWidgetEntryView(entry: entry)
         }
         .configurationDisplayName("Pixy Widget")
-        .description("Wyświetla wiadomość od drugiej osoby.")
+        .description("Displays a message from the other person.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

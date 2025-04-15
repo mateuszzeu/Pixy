@@ -27,12 +27,12 @@ class RegisterViewController: UIViewController {
         emailField.keyboardType = .emailAddress
         emailField.translatesAutoresizingMaskIntoConstraints = false
 
-        passwordField.placeholder = "Hasło"
+        passwordField.placeholder = "Password"
         passwordField.borderStyle = .roundedRect
         passwordField.isSecureTextEntry = true
         passwordField.translatesAutoresizingMaskIntoConstraints = false
 
-        registerButton.setTitle("Zarejestruj się", for: .normal)
+        registerButton.setTitle("Register", for: .normal)
         registerButton.setTitleColor(.white, for: .normal)
         registerButton.backgroundColor = UIColor.systemBlue
         registerButton.layer.cornerRadius = 8
@@ -62,7 +62,7 @@ class RegisterViewController: UIViewController {
     @objc private func registerTapped() {
         guard let email = emailField.text, !email.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
-            showAlert(title: "Błąd", message: "Wprowadź poprawne dane")
+            showAlert(title: "Error", message: "Enter the correct data")
             return
         }
 
@@ -74,7 +74,7 @@ class RegisterViewController: UIViewController {
         do {
             let existing = try context.fetch(request)
             if !existing.isEmpty {
-                showAlert(title: "Błąd", message: "Konto o podanym adresie e-mail już istnieje")
+                showAlert(title: "Error", message: "An account with the specified email address already exists")
                 return
             }
 
@@ -92,7 +92,7 @@ class RegisterViewController: UIViewController {
             navigationController?.popViewController(animated: true)
 
         } catch {
-            showAlert(title: "Błąd", message: "Nie udało się zapisać użytkownika")
+            showAlert(title: "Error", message: "Failed to save user")
         }
     }
 

@@ -33,13 +33,13 @@ class WidgetViewController: UIViewController {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
 
         
-        createButton.setTitle("Utwórz wiadomość", for: .normal)
+        createButton.setTitle("Create message", for: .normal)
         createButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         createButton.setTitleColor(.white, for: .normal)
         createButton.addTarget(self, action: #selector(openCreateMessage), for: .touchUpInside)
         createButton.translatesAutoresizingMaskIntoConstraints = false
         
-        logoutButton.setTitle("Wyloguj się", for: .normal)
+        logoutButton.setTitle("Log out", for: .normal)
         logoutButton.setTitleColor(.white, for: .normal)
         logoutButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         logoutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +66,7 @@ class WidgetViewController: UIViewController {
 
     private func loadMessage() {
         guard let currentEmail = UserDefaults(suiteName: "group.com.xzeu.pixy")?.string(forKey: "loggedInEmail") else {
-            messageLabel.text = "Czekaj na wiadomosc"
+            messageLabel.text = "Wait for the message"
             return
         }
 
@@ -79,12 +79,12 @@ class WidgetViewController: UIViewController {
 
         do {
             if let last = try context.fetch(request).first {
-                messageLabel.text = last.text ?? "Brak wiadomości"
+                messageLabel.text = last.text ?? "No message"
             } else {
-                messageLabel.text = "Brak wiadomości do wyświetlenia"
+                messageLabel.text = "No message"
             }
         } catch {
-            messageLabel.text = "Błąd podczas ładowania wiadomości"
+            messageLabel.text = "Error while loading message"
         }
     }
 

@@ -26,17 +26,17 @@ class CreateMessageViewController: UIViewController {
         setupUI()
     }
     private func setupUI() {
-        receiverField.placeholder = "Email odbiorcy"
+        receiverField.placeholder = "Send to"
         receiverField.borderStyle = .roundedRect
         receiverField.autocapitalizationType = .none
         receiverField.keyboardType = .emailAddress
         receiverField.translatesAutoresizingMaskIntoConstraints = false
         
-        textField.placeholder = "Wpisz wiadomość"
+        textField.placeholder = "Type your message"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         
-        saveButton.setTitle("Zapisz wiadomość", for: .normal)
+        saveButton.setTitle("Pix it! ✨", for: .normal)
         saveButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .systemBlue
