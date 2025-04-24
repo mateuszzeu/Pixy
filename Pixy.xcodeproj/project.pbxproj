@@ -44,6 +44,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6E5B7ECD2DBA77120071BFA8 /* Exceptions for "Service" folder in "PixyWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WidgetMessageService.swift,
+			);
+			target = 6E62609B2DA8F9C400DB78FA /* PixyWidgetExtension */;
+		};
+		6E5B7F1A2DBA7D340071BFA8 /* Exceptions for "PixyWidget" folder in "Pixy" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/MessageEntry.swift,
+			);
+			target = 6E74AF762DA4270500FB713C /* Pixy */;
+		};
 		6E6260B12DA8F9C600DB78FA /* Exceptions for "PixyWidget" folder in "PixyWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -73,6 +87,7 @@
 		6E6260A22DA8F9C400DB78FA /* PixyWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				6E5B7F1A2DBA7D340071BFA8 /* Exceptions for "PixyWidget" folder in "Pixy" target */,
 				6E6260B12DA8F9C600DB78FA /* Exceptions for "PixyWidget" folder in "PixyWidgetExtension" target */,
 			);
 			path = PixyWidget;
@@ -103,6 +118,9 @@
 		};
 		6E6FFAB62DAE5CD900397E8F /* Service */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6E5B7ECD2DBA77120071BFA8 /* Exceptions for "Service" folder in "PixyWidgetExtension" target */,
+			);
 			path = Service;
 			sourceTree = "<group>";
 		};
